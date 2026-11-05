@@ -1,0 +1,154 @@
+---
+title: "NYC Restaurant Inspection Dashboard"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+library(lubridate)
+
+data("rest_inspec")
+
+# Clean and sample data
+inspection_clean =
+  rest_inspec |>
+  rename(borough = boro) |>
+  mutate(
+    inspection_date = as.Date(inspection_date),
+    year = lubridate::year(inspection_date),
+    month = lubridate::floor_date(inspection_date, "month")
+  ) |>
+  filter(
+    !is.na(inspection_date),
+    !is.na(score),
+    score >= 0,
+    score <= 100,
+    !is.na(borough),
+    borough != "0"
+  )
+
+# Sampling: up to 4,000 observations per borough
+inspection_sample =
+  inspection_clean |>
+  group_by(borough) |>
+  slice_sample(n = 4000) |>
+  ungroup()
+
+# Summary data
+borough_score =
+  inspection_data |>
+  group_by(borough) |>
+  summarize(
+    average_score = mean(score),
+    median_score = median(score),
+    n = n(),
+    .groups = "drop"
+  )
+
+monthly_data =
+  inspection_data |>
+  count(month)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### 1 Bar Plot: Average Inspection Score by Borough
+
+```{r}
+borough_score =
+  inspection_data |>
+  group_by(borough) |>
+  summarize(
+    average_score = mean(score, na.rm = TRUE),
+    median_score = median(score, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+
+plot_ly(
+  borough_score,
+  x = ~borough,
+  y = ~average_score,
+  type = "bar",
+  color = ~borough,
+  text = ~paste(
+    "Average score:", round(average_score, 2),
+    "<br>Median score:", median_score,
+    "<br>Records:", n
+  ),
+  hoverinfo = "text"
+) |>
+  layout(
+    title = "Average Inspection Score by Borough",
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Average Inspection Score"),
+    showlegend = FALSE
+  )
+```
+
+### Monthly Inspection Records
+
+```{r}
+plot_ly(
+  borough_score,
+  x = ~borough,
+  y = ~average_score,
+  type = "bar",
+  color = ~borough,
+  text = ~paste(
+    "Average score:", round(average_score, 2),
+    "<br>Median score:", median_score,
+    "<br>Records:", n
+  ),
+  hoverinfo = "text"
+) |>
+  layout(
+    title = "Average Inspection Score by Borough",
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Average Inspection Score"),
+    showlegend = FALSE
+  )
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Distribution of Inspection Scores
+
+```{r}
+plot_ly(
+  inspection_data,
+  x = ~score,
+  type = "histogram",
+  nbinsx = 40,
+  marker = list(color = "seagreen")
+) |>
+  layout(
+    xaxis = list(title = "Inspection Score"),
+    yaxis = list(title = "Frequency"),
+    title = "Distribution of Inspection Scores"
+  )
+```
+
+### Inspection Scores by Borough
+
+```{r}
+plot_ly(
+  inspection_data,
+  x = ~borough,
+  y = ~score,
+  type = "box",
+  color = ~borough
+) |>
+  layout(
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Inspection Score"),
+    title = "Score Comparison Across Boroughs"
+  )
+```
