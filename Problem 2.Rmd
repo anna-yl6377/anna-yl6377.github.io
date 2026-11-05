@@ -15,14 +15,14 @@ library(lubridate)
 
 data("rest_inspec")
 
-# Clean and sample data
+# Data cleaning
 inspection_clean =
   rest_inspec |>
   rename(borough = boro) |>
   mutate(
     inspection_date = as.Date(inspection_date),
-    year = lubridate::year(inspection_date),
-    month = lubridate::floor_date(inspection_date, "month")
+    year = year(inspection_date),
+    month = floor_date(inspection_date, "month")
   ) |>
   filter(
     !is.na(inspection_date),
@@ -33,7 +33,7 @@ inspection_clean =
     borough != "0"
   )
 
-# Sampling: up to 4,000 observations per borough
+# Sampling
 inspection_sample =
   inspection_clean |>
   group_by(borough) |>
@@ -42,7 +42,7 @@ inspection_sample =
 
 # Summary data
 borough_score =
-  inspection_data |>
+  inspection_sample |>
   group_by(borough) |>
   summarize(
     average_score = mean(score),
@@ -52,7 +52,7 @@ borough_score =
   )
 
 monthly_data =
-  inspection_data |>
+  inspection_clean |>
   count(month)
 ```
 
@@ -62,16 +62,6 @@ Column {data-width=500}
 ### 1 Bar Plot: Average Inspection Score by Borough
 
 ```{r}
-borough_score =
-  inspection_data |>
-  group_by(borough) |>
-  summarize(
-    average_score = mean(score, na.rm = TRUE),
-    median_score = median(score, na.rm = TRUE),
-    n = n(),
-    .groups = "drop"
-  )
-
 plot_ly(
   borough_score,
   x = ~borough,
@@ -93,62 +83,38 @@ plot_ly(
   )
 ```
 
-### Monthly Inspection Records
+### 2 Line Plot: Monthly Inspection Records
 
 ```{r}
 plot_ly(
-  borough_score,
-  x = ~borough,
-  y = ~average_score,
-  type = "bar",
-  color = ~borough,
-  text = ~paste(
-    "Average score:", round(average_score, 2),
-    "<br>Median score:", median_score,
-    "<br>Records:", n
-  ),
-  hoverinfo = "text"
+  monthly_data,
+  x = ~month,
+  y = ~n,
+  type = "scatter",
+  mode = "lines+markers"
 ) |>
   layout(
-    title = "Average Inspection Score by Borough",
-    xaxis = list(title = "Borough"),
-    yaxis = list(title = "Average Inspection Score"),
-    showlegend = FALSE
+    title = "Monthly Inspection Records",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Number of Records")
   )
-
+```
 Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Distribution of Inspection Scores
+### 3 Histogram Plot: Distribution of Inspection Scores
 
 ```{r}
 plot_ly(
-  inspection_data,
+  inspection_sample,
   x = ~score,
   type = "histogram",
-  nbinsx = 40,
-  marker = list(color = "seagreen")
+  nbinsx = 30
 ) |>
   layout(
+    title = "Distribution of Inspection Scores",
     xaxis = list(title = "Inspection Score"),
-    yaxis = list(title = "Frequency"),
-    title = "Distribution of Inspection Scores"
+    yaxis = list(title = "Frequency")
   )
 ```
 
-### Inspection Scores by Borough
-
-```{r}
-plot_ly(
-  inspection_data,
-  x = ~borough,
-  y = ~score,
-  type = "box",
-  color = ~borough
-) |>
-  layout(
-    xaxis = list(title = "Borough"),
-    yaxis = list(title = "Inspection Score"),
-    title = "Score Comparison Across Boroughs"
-  )
-```
