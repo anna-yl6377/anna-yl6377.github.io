@@ -1,0 +1,42 @@
+---
+title: "Resume"
+output: html_document
+---
+
+# Education
+## Peking University
+
+- Degree: Bachelor of Science, Bachelor of Arts
+- Major: Chemical Biology, Economics
+- Duration: 2022.09-2026.07
+
+## Columbia University
+
+- Degree: Master
+- Expected Graduation: 2028
+
+# Professional Experience
+
+## Waton Securities International Limited | Equity Research Intership
+
+- Pitched BeiGene (6160.HK) via top-down/DCF modeling; identified 20% upside by analyzing the industry trends, market share, asset-liability structure, and competitive landscape, especially of the main product Zanubrutinib
+- Presented key insights in the Antibody-Drug Conjugate (ADC) market by analyzing regulatory policies, commercialization pathways, licensing activity, competitor market share, and clinical trial performance, developing an insight into the gap between medical value and commericial value
+
+## SDIC Securities Co., Ltd. | Quantitative Research Intern
+
+- Studied a systematic multi-factor equity strategy in Python; engineered and validated alpha factors via IC/IR and correlation filters, integrated signals via ML regression, and back-tested a rebalancing pipeline with transaction costs, stop-loss, and risk filters
+
+# Academic Experience
+
+I do most of my academic research in the Chemical Biology Lab in PKU.
+
+## Optimization of FTO-Assisted Selective Chemical Labeling of N6-Hydroxymethyladenine 
+
+- Designed and conducted experiments for detecting m6A and m6Am RNA modifications, with a goal to distinguish
+- Investigated the impact of varying FTO concentrations on labeling efficiency, systematically compared multiple labeling reagents, and identified optimal experimental conditions
+
+# Technical Skills
+
+- Programming: Python, R
+- Data Analysis: Statistical Analysis
+- Research: Equity Research, Biochemistry Research

@@ -1,0 +1,12 @@
+---
+title: "Home"
+---
+# Hello, I'm Yixuan Li.
+
+I am a biostatistics student at Columbia University with interests in data science, and biotechnology.
+
+I enjoy exploring how data analysis and fundamental research can be used to understand businesses and evaluate investment opportunities.
+
+Welcome to my personal website!
+
+<img src="images_web/LYX.jpg" width="200px">

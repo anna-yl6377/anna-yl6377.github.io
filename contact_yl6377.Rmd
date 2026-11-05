@@ -1,0 +1,20 @@
+---
+title: "Contact"
+output: html_document
+---
+
+# Get in Touch
+
+Thank you for visiting my website. Feel free to connect with me through the following platforms.
+
+## Email
+
+[anna040407@gmail.com](mailto:anna040407@gmail.com)
+
+## LinkedIn
+
+[Connect with me on LinkedIn](https://www.linkedin.com/in/yixuan-li-849788424/)
+
+## GitHub
+
+[Visit my GitHub](https://github.com/anna-yl6377)

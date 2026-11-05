@@ -1,0 +1,26 @@
+name: "Yixuan Li"
+output_dir: "docs"
+
+navbar:
+  title: "Yixuan Li"
+  left:
+    - text: "Home"
+      href: index_yl6377.html
+    - text: "Resume"
+      href: resume_yl6377.html
+    - text: "Contact"
+      href: contact_yl6377.html
+      
+  right:
+    - icon: fa-github
+      href: https://github.com/anna-yl6377
+    - icon: fa-linkedin
+      href: https://www.linkedin.com/in/yixuan-li-849788424/
+    - icon: fa-envelope
+      href: mailto:anna040407@gmail.com
+
+output:
+  html_document:
+    theme: flatly
+    toc: false
+    css: styles.css

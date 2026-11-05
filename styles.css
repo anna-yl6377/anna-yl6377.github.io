@@ -1,0 +1,17 @@
+/* Main title */
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Second-level headings */
+h2 {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+/* Third-level headings */
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
