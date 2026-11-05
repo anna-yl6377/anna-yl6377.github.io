@@ -5,11 +5,11 @@ navbar:
   title: "Yixuan Li"
   left:
     - text: "Home"
-      href: index_yl6377.html
+      href: index.html
     - text: "Resume"
-      href: resume_yl6377.html
+      href: resume.html
     - text: "Contact"
-      href: contact_yl6377.html
+      href: contact.html
       
   right:
     - icon: fa-github
