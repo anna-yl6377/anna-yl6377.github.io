@@ -10,6 +10,8 @@ navbar:
       href: resume.html
     - text: "Contact"
       href: contact.html
+    - text: "Problem 2"
+      href: problem2.html
       
   right:
     - icon: fa-github
